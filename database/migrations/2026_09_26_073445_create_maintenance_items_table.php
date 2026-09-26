@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('maintenance_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
             $table->string('name');
-            $table->string('brand');
-            $table->string('model');
-            $table->unsignedSmallInteger('year')->nullable();
-            $table->string('licence_plate')->nullable();
-            $table->decimal('initial_odometer', 10, 1);
+            $table->unsignedInteger('interval_km');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('maintence_items');
     }
 };
