@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Vehicle extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'name',
+        'brand',
+        'model',
+        'year',
+        'licence_plate',
+        'initial_odometer',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function odometerLogs()
+    {
+        return $this->hasMany(OdometerLog::class);
+    }
+
+    public function fuelLogs()
+    {
+        return $this->hasMany(FuelLog::class);
+    }
+
+    public function maintenanceItems()
+    {
+        return $this->hasMany(MaintenanceItem::class);
+    }
+}
