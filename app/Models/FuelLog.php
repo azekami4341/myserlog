@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FuelLog extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'vehicle_id',
         'odometer',

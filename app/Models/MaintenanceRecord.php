@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaintenanceRecord extends Model
 {
+    use HasFactory;
+    
     protected $fillable = [
         'maintenance_item_id',
         'date',

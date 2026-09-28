@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaintenanceItem extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'vehicle_id',
         'name',
