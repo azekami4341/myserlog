@@ -14,7 +14,7 @@ class VehicleSeeder extends Seeder
      */
     public function run(): void
     {
-        $test = User::where('email', 'admin@admin.com')->first();
+        $test = User::where('email', 'test@test.com')->first();
         if ($test){
             Vehicle::factory()->count(5)->for($test)->create();
         }
