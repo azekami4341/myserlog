@@ -30,7 +30,7 @@ class VehicleFactory extends Factory
             ]),
             'model' => fake()->word(),
             'year' => fake()->numberBetween(2000, 2026),
-            'licence_plate' => fake()->bothify('K #### ??'),
+            'license_plate' => fake()->bothify('K #### ??'),
             'initial_odometer' => fake()->randomFloat(1, 0, 299999),
         ];
     }

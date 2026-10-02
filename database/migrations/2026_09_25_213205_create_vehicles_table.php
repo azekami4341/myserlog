@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->unsignedSmallInteger('year')->nullable();
-            $table->string('licence_plate')->nullable();
+            $table->string('license_plate')->nullable();
             $table->decimal('initial_odometer', 10, 1);
             $table->timestamps();
         });

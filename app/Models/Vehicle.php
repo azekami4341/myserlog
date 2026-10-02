@@ -15,7 +15,7 @@ class Vehicle extends Model
         'brand',
         'model',
         'year',
-        'licence_plate',
+        'license_plate',
         'initial_odometer',
     ];
 
