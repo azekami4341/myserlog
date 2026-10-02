@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vehicle;
 use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 
 class VehicleController extends Controller
 {
@@ -36,17 +37,15 @@ class VehicleController extends Controller
         return view('vehicles.edit', compact('vehicle'));
     }
 
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
-        Auth::user()->vehicle()->update($request);
-        //$vehicle->update($request->all());
+        $vehicle->update($request->validated());
         return redirect()->route('vehicles.index');
     }
 
     public function destroy(Vehicle $vehicle)
     {
-        Auth::user()->vehicle()->delete();
-        //$vehicle->delete();
+        $vehicle->delete();
         return redirect()->route('vehicles.index');
     }
 }
