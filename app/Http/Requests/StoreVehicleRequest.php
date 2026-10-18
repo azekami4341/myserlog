@@ -41,6 +41,9 @@ class StoreVehicleRequest extends FormRequest
             'brand.required' => 'brand name is required.',
             'brand.max' => 'maximum brand name length is 255.',
 
+            'model.required' => 'vehicle model is required.',
+            'model.max' => 'maximum model length is 255.',
+
             'year.integer' => 'year must be a number.',
             'year.min' => 'year must higher than 1900.',
 
