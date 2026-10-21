@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Vehicle;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
@@ -29,22 +30,26 @@ class VehicleController extends Controller
 
     public function show(Vehicle $vehicle)
     {
+        Gate::authorize('view', $vehicle);
         return view('vehicles.show', compact('vehicle'));
     }
 
     public function edit(Vehicle $vehicle)
     {
+        Gate::authorize('update', $vehicle);
         return view('vehicles.edit', compact('vehicle'));
     }
 
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
+        Gate::authorize('view', $vehicle);
         $vehicle->update($request->validated());
-        return redirect()->route('vehicles.index');
+        return redirect()->route('vehicles.show', $vehicle)->with('success', 'Vehicle data has been updated!');
     }
 
     public function destroy(Vehicle $vehicle)
     {
+        Gate::authorize('delete', $vehicle);        
         $vehicle->delete();
         return redirect()->route('vehicles.index');
     }
