@@ -13,7 +13,7 @@ class VehiclePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->id === $vehicle->user_id;
     }
 
     /**
@@ -29,7 +29,7 @@ class VehiclePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->id === $vehicle->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle): bool
     {
-        return false;
+        return $user->id === $vehicle->user_id;
     }
 
     /**
