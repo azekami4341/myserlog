@@ -11,9 +11,6 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
-                <div class="p-6 text-white" >
-                    <a href="{{ route ('vehicles.index') }}" class="text-blue-500 hover:underline"> Vehicle </a>
-                </div>
             </div>
         </div>
     </div>
