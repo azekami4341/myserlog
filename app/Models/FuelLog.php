@@ -20,6 +20,14 @@ class FuelLog extends Model
         'notes',
     ];
 
+    protected function cast():array
+    {
+        return [
+            'is_fuel_tank' => 'boolean',
+            'date' => 'date'
+        ];
+    }
+
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
