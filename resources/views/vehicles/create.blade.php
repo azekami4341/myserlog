@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <x-input-label for="intial_odometer" :value="__('Initial Odometer (Example:123000)')" />
+                        <x-input-label for="intial_odometer" :value="__('Initial Odometer (Example:123450.9)')" />
                         <x-text-input id="initial_odometer" class="block mt-1 w-full" type="number" name="initial_odometer" :value="old('initial_odometer')" step="0.1" required />
                         <x-input-error :messages="$errors->get('initial_odometer')" class="mt-2" />
                     </div>
