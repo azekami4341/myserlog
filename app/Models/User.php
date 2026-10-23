@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Vehicle::class);
     }
+
+    public function fuellogs()
+    {
+        return $this->hasManyThrough(FuelLog::class, Vehicle::class);
+    }
 }
