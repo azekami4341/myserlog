@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\FuelLogController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('vehicles', VehicleController::class)->middleware('auth');
+    Route::resource('fuel-logs', FuelLogController::class)->except(['index', 'show'])->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

@@ -12,7 +12,7 @@ class StoreFuelLogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,13 +23,20 @@ class StoreFuelLogRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'vehicle_id' => ['required', 'exists:vehicles,id'],
             'odometer' => ['required', 'numeric', 'min:0', 'max:9999999', 'decimal:0,1'],
             'date' => ['required', 'date'],
             'liters' => ['required', 'numeric', 'gt:0'],
             'price_per_liter' => ['required', 'numeric', 'min:0'],
-            'is_full_tank' => ['required', 'boolean'],
+            'is_full_tank' => ['nullable', 'boolean'],
+            'total_cost' => ['required', 'numeric', 'min:0'],
             'notes' => ['nullable', 'string'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['is_full_tank' => $this->has('is_full_tank'),]);
     }
 
     public function messages(): array

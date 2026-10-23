@@ -16,14 +16,14 @@ class FuelLog extends Model
         'liters',
         'price_per_liter',
         'total_cost',
-        'is_fuel_tank',
+        'is_full_tank',
         'notes',
     ];
 
-    protected function cast():array
+    protected function casts():array
     {
         return [
-            'is_fuel_tank' => 'boolean',
+            'is_full_tank' => 'boolean',
             'date' => 'date'
         ];
     }
