@@ -31,7 +31,14 @@ class VehicleController extends Controller
     public function show(Vehicle $vehicle)
     {
         Gate::authorize('view', $vehicle);
-        return view('vehicles.show', compact('vehicle'));
+        $vehicle->load(['fuelLogs' => function ($query) {
+        $query->orderBy('odometer', 'desc');
+        }]);
+
+        $overallFuelEfficiency = $vehicle->calculateOverallFuelEfficiency();
+        $latestFuelEfficiency = $vehicle->calculateLatestFuelEfficiency();
+
+        return view('vehicles.show', compact('vehicle', 'overallFuelEfficiency', 'latestFuelEfficiency'));
     }
 
     public function edit(Vehicle $vehicle)

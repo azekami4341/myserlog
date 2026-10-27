@@ -38,4 +38,63 @@ class Vehicle extends Model
     {
         return $this->hasMany(MaintenanceItem::class);
     }
+
+    public function calculateLatestFuelEfficiency(): ?float
+    {
+        $fullTanks = $this->fuelLogs()
+            ->where('is_full_tank', true)
+            ->orderByDesc('odometer')
+            ->take(2)
+            ->get();
+
+        if ($fullTanks->count() < 2) {
+            return null;
+        }
+
+        $latestFull = $fullTanks[0];
+        $previousFull = $fullTanks[1];
+
+        $distance = $latestFull->odometer - $previousFull->odometer;
+
+        $litersUsed = $this->fuelLogs()
+            ->where('odometer', '>', $previousFull->odometer)
+            ->where('odometer', '<=', $latestFull->odometer)
+            ->sum('liters');
+
+        if ($distance <= 0 || $litersUsed <= 0) {
+            return null;
+        }
+
+        return round($distance / $litersUsed, 2);
+    }
+
+    public function calculateOverallFuelEfficiency(): ?float
+    {
+        $firstFull = $this->fuelLogs()
+            ->where('is_full_tank', true)
+            ->orderBy('odometer')
+            ->first();
+
+        $latestFull = $this->fuelLogs()
+            ->where('is_full_tank', true)
+            ->orderByDesc('odometer')
+            ->first();
+
+        if (!$firstFull || !$latestFull || $firstFull->is($latestFull)) {
+            return null;
+        }
+
+        $distance = $latestFull->odometer - $firstFull->odometer;
+
+        $litersUsed = $this->fuelLogs()
+            ->where('odometer', '>', $firstFull->odometer)
+            ->where('odometer', '<=', $latestFull->odometer)
+            ->sum('liters');
+
+        if ($distance <= 0 || $litersUsed <= 0) {
+            return null;
+        }
+
+        return round($distance / $litersUsed, 2);
+    }
 }
