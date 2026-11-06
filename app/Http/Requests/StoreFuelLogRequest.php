@@ -58,9 +58,6 @@ class StoreFuelLogRequest extends FormRequest
             'price_per_liter.required' => 'price must be filled',
             'price_per_liter.numeric' => 'price must be a number',
             'price_per_liter.min' => 'price must be greater than or equal to 0',
-
-            'is_full_tank.required' => 'this field must be filled',
-            'is_full_tank.boolean' => 'the checkbox must be filled',
         ];
     }
 }

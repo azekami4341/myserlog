@@ -59,14 +59,14 @@ class FuelLogController extends Controller
     public function edit(FuelLog $fuelLog)
     {
         Gate::authorize('update', $fuelLog);
-        $vehicle = $fuelLog->$vehicle;
+        $vehicle = $fuelLog->vehicle;
         return view('fuel-logs.edit', compact('fuelLog', 'vehicle'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFuelLogRequest $request, string $id)
+    public function update(UpdateFuelLogRequest $request, FuelLog $fuelLog)
     {
         Gate::authorize('update', $fuelLog);
         $fuelLog->update($request->validated());
@@ -79,7 +79,7 @@ class FuelLogController extends Controller
      */
     public function destroy(FuelLog $fuelLog)
     {
-        Gate::authtorize('delete', $fuelLog);
+        Gate::authorize('delete', $fuelLog);
         $vehicleId = $fuelLog->vehicle_id;
         $fuelLog->delete();
 
